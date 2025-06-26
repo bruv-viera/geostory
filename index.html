@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zimbabwe CORS Town Map</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+  />
+  <style>
+    body { margin:0; background: black; }
+    #map { width: 100vw; height: 100vh; }
+    .town-label {
+        color: white;
+        font-size: 14px;
+        font-family: 'Arial', sans-serif;
+        text-shadow: 1px 1px 2px black;
+        background: rgba(0,0,0,0.3);
+        padding: 2px 4px;
+        border-radius: 4px;
+        opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script>
+    const map = L.map('map').setView([-19, 29.5], 6);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap &copy; CARTO'
+    }).addTo(map);
+
+    const towns = [
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Harare"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        31.0522,
+        -17.8292
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Bulawayo"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        28.5826,
+        -20.1451
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Mutare"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        32.6709,
+        -18.9707
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Masvingo"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        30.8277,
+        -20.0637
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Chinhoyi"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        30.2,
+        -17.3667
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Gweru"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        29.8167,
+        -19.45
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Kwekwe"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        29.8149,
+        -18.9281
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Kadoma"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        29.9167,
+        -18.3333
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Victoria Falls"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        25.8304,
+        -17.9318
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Beitbridge"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        30.0,
+        -22.2167
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Hwange"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        26.5,
+        -18.3833
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Marondera"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        31.55,
+        -18.1833
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Chiredzi"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        31.6667,
+        -21.05
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Zvishavane"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        30.0665,
+        -20.3267
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Gwanda"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        29.0,
+        -21.0167
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Bindura"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        31.3306,
+        -17.3019
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Rusape"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        32.1283,
+        -18.5278
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Mt. Darwin"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        31.5833,
+        -16.7667
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Nyanga"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        32.75,
+        -18.2167
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Karoi"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        29.6833,
+        -16.8167
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Ruwa"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        31.2,
+        -17.8833
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Mberengwa"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        29.85,
+        -20.45
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Chegutu"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        30.1407,
+        -18.1302
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Chipinge"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        32.6167,
+        -20.2
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Kariba"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        28.8,
+        -16.5167
+      ]
+    }
+  }
+];
+
+    L.geoJSON(towns, {
+      onEachFeature: (feature, layer) => {
+        const name = feature.properties && feature.properties.name ? feature.properties.name : "Unknown";
+        layer.bindTooltip(name, {
+          direction: 'top',
+          permanent: false,
+          className: 'town-label',
+          opacity: 0.9
+        });
+      },
+      pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
+        radius: 6,
+        fillColor: 'red',
+        color: 'white',
+        weight: 1,
+        fillOpacity: 1
+      })
+    }).addTo(map);
+
+    fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/zimbabwe.geojson')
+      .then(r=>r.json()).then(data => {
+        L.geoJSON(data, {
+          style: { color: 'white', weight: 2, fill: true, fillColor: '#444', fillOpacity: 1 }
+        }).addTo(map);
+      });
+  </script>
+</body>
+</html>
